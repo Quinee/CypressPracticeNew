@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-08-06T14:24:37.358Z",
+    "end": "2024-08-06T14:24:44.665Z",
+    "duration": 7307,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ac716499-1c7d-4469-ab72-ff56b9da1775",
+      "title": "",
+      "fullFile": "cypress/integration/examples/Test3Framework.js",
+      "file": "cypress/integration/examples/Test3Framework.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5318d9cc-c974-49e4-99ab-85b92ef5a58c",
+          "title": "Test Framework",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test case 1",
+              "fullTitle": "Test Framework Test case 1",
+              "timedOut": null,
+              "duration": 6645,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const homePage = new _HomePage.default();\nconst productPage = new _ProductPage.default();\ncy.visit(Cypress.env('url') + '/angularpractice/');\nhomePage.getEditBox().type(this.data.name);\nhomePage.getTwoWayDataBinding().should('have.value', this.data.name);\nhomePage.getEditBox().should('have.attr', 'minlength', 2);\nhomePage.getEntrepreneur().should('be.disabled');\nhomePage.getGender().select(this.data.gender);\n//Click on Shop\nhomePage.getShopTab().click();\n//Select product by calling the method from support/commands.js\n//cy.selectProduct('Blackberry')\n//cy.selectProduct('Nokia Edge')\n//We will call the above method using for each loop\nthis.data.productName.forEach(function (elem) {\n  cy.selectProduct(elem);\n});\nproductPage.clickCheckoutBtn().click();\nlet sum = 0;\ncy.get('tr td:nth-child(4) strong').each(($el, index) => {\n  //let amount = $el.text().split(\" \")\n  //sum = Number(sum)+ Number(amount[1].trim())\n  let amount = $el.text();\n  let res = amount.split(\" \");\n  res = res[1].trim();\n  sum = Number(sum) + Number(res);\n  cy.log(\"NN \" + sum);\n}).then(function () {\n  cy.log(\"NN2 \" + sum); //2\n});\ncy.get('h3 strong').then(function (element) {\n  const amount = element.text();\n  var res = amount.split(\" \");\n  var total = res[1].trim();\n  expect(Number(total)).to.equal(sum);\n});\n//cy.pause()\nproductPage.clickConfirmCheckoutBtn().click();\nproductPage.addCountryName().type(\"Ind\");\ncy.wait(4000);\nproductPage.selectCountry(\"India\");\nproductPage.clickOnCheckbox().click({\n  force: true\n});\nproductPage.clickOnPurchase().click();\nproductPage.getAlertMsg();",
+              "err": {},
+              "uuid": "e7fa4d7a-be30-4739-9f68-7154c86e1780",
+              "parentUUID": "5318d9cc-c974-49e4-99ab-85b92ef5a58c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e7fa4d7a-be30-4739-9f68-7154c86e1780"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6645,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "embeddedScreenshots": true,
+        "videoOnFailOnly": false,
+        "saveAllAttempts": true,
+        "overwrite": false,
+        "reportsDir": "reports/demoFolder",
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/html/.jsons"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

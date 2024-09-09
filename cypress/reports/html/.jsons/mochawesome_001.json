@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-08-06T14:24:34.150Z",
+    "end": "2024-08-06T14:24:36.659Z",
+    "duration": 2509,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "10d841ad-7dfd-4615-92d2-230dd9a36ad5",
+      "title": "",
+      "fullFile": "cypress/integration/examples/Test2.js",
+      "file": "cypress/integration/examples/Test2.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c6919b66-2b48-4788-9e6e-4a17ef9652e2",
+          "title": "My Second Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify date selection",
+              "fullTitle": "My Second Test Suite Verify date selection",
+              "timedOut": null,
+              "duration": 1847,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const monthNumber = \"6\";\nconst date = \"15\";\nconst year = \"2027\";\nconst expectedList = [monthNumber, date, year];\ncy.visit(\"https://rahulshettyacademy.com/seleniumPractise/#/offers\");\ncy.wait(1000);\ncy.get(\".react-date-picker__inputGroup\").click();\ncy.get(\".react-calendar__navigation__label\").click();\ncy.get(\".react-calendar__navigation__label\").click();\ncy.contains(\"button\", year).click();\ncy.get(\".react-calendar__year-view__months__month\").eq(Number(monthNumber) - 1).click();\ncy.contains(\"abbr\", date).click();\n//Assertion\ncy.get(\".react-date-picker__inputGroup__input\").each(($el, index) => {\n  cy.wrap($el).invoke('val').should('eq', expectedList[index]);\n});",
+              "err": {},
+              "uuid": "19693c7a-1d0c-4d16-b9ad-89aeaa87167d",
+              "parentUUID": "c6919b66-2b48-4788-9e6e-4a17ef9652e2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "19693c7a-1d0c-4d16-b9ad-89aeaa87167d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1847,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "embeddedScreenshots": true,
+        "videoOnFailOnly": false,
+        "saveAllAttempts": true,
+        "overwrite": false,
+        "reportsDir": "reports/demoFolder",
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/html/.jsons"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
