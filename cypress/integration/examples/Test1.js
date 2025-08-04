@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+
 describe('My First test case',function(){
     it("Test case",function(){
         cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/')

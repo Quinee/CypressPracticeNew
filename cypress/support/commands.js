@@ -11,6 +11,7 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+/// <reference types="Cypress" />
 Cypress.Commands.add('selectProduct', (productName) => { 
     cy.get('h4.card-title').each(($e1,index)=>{
     if($e1.text().includes(productName)){
