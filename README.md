@@ -179,3 +179,128 @@ GitHub: [@your-username](https://github.com/your-username)
 - **cypress-iframe**: `^1.0.1`
 - **cypress-mochawesome-reporter**: `^3.8.2`
 - **neat-csv**: `5.1.0`
+
+NOTES:
+
+1. We have cypress xpath plugin if we want to use xpath selector https://www.cypress.io/blog/understanding-selectors-in-testing
+   Why it's not in official Cypress docs
+   Cypress has always encouraged using CSS selectors instead of XPath because:
+
+Cypress natively supports only CSS selectors.
+
+CSS selectors are faster, easier to read, and work better with Cypress’s retry-ability and shadow DOM features.
+
+That’s why you won’t see cypress-xpath promoted in the official docs — it goes against Cypress’s design philosophy, though it still works.
+
+cy.xpath('<locator>')
+cy.xpath().xpath() -> Chained xpath
+STeps:
+
+1. install the plugin using `npm install -D cypress-xpath`
+2. Add /// <reference types="cypress-xpath" /> in support/commands.js
+3. Add require('cypress-xpath') in support/e2e.js
+
+## Cypress Assertions
+
+1. Implicit > should, and
+2. Explicit > expect, assert
+
+### We can chain multiple assertions
+
+cy.url().should('include', 'abc').and('eq', 'https://abc.com').and('not.contain', 'xyz')
+.should('be.visible').and('exist')
+.should(have, value)
+
+You can chain Cypress commands, but .text() is not a Cypress command — it's a jQuery method. That’s why you can’t chain it like other Cypress commands.
+
+🔍 Let's break it down:
+✅ Cypress commands (chainable):
+Commands like these return Cypress “Chainable” objects, which support chaining:
+
+js
+Copy
+Edit
+cy.get('selector') // Cypress command
+.click() // Cypress command
+.should('be.visible') // Cypress command
+Each of these is a Cypress function that returns control back to Cypress’s internal command queue — allowing Cypress to manage timing, retries, and assertions.
+
+In Cypress: What does $ mean?
+In Cypress, $ is often used to represent a jQuery-wrapped DOM element.
+
+🔍 Example:
+js
+Copy
+Edit
+cy.get('.my-element').then(($el) => {
+const text = $el.text(); // $el is a jQuery object
+});
+Here:
+
+cy.get() returns a Cypress chainable object.
+
+.then(($el) => {}) gives you access to the actual DOM element wrapped in jQuery.
+
+$el is just a naming convention — not a special character — but by convention, Cypress (and jQuery) developers use $ as a prefix to signal:
+
+"This variable is a jQuery object."
+
+You could rename it and it would still work:
+
+js
+Copy
+Edit
+.then((el) => el.text()) // works fine too
+But using $el makes your code more readable and clear that it’s not a raw DOM node — it’s a jQuery-wrapped one.
+
+//TDD Style
+assert.equal(actual,expected)
+assert.notEqual(actual,expected)
+https://docs.cypress.io/app/references/assertions
+
+```
+my-cypress-project/
+├── cypress/
+│ ├── e2e/ # Your end-to-end test files
+│ ├── fixtures/ # Static test data (JSON, etc.)
+│ ├── support/
+│ │ ├── commands.js # Custom Cypress commands
+│ │ └── e2e.js # Global setup code for E2E tests
+│
+├── cypress.config.js # Main Cypress configuration file
+├── package.json # Project dependencies and scripts
+```
+
+## Selecting Radio btns and checkboxes
+
+cy.get().check().should('be.checked ')
+cy.get('<locator>').uncheck().should('not.be.checked')
+
+## Selecting first and last checkbox
+
+cy.get('<locator>').first().check()
+cy.get('<locator>').last().check()
+
+## Website for automation practice
+
+https://www.automationexercise.com/
+[text](https://www.zoho.com/commerce/free-demo.html)
+[text](https://testing.qaautomationlabs.com/index.php)
+
+## Selecting values from Dropdown
+
+cy.get('<locator>').select('India').should('have.value','India')
+
+## To press enter from keyboard
+
+cy.get('<locator>').type('Italy').type('{enter}')
+
+## Difference between `have.value` and `have.text`
+
+| Assertion                     | Used For                                                 | What It Checks                                           | Example Element                   |
+| ----------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | --------------------------------- |
+| `should('have.value', 'abc')` | **Form inputs** (like `<input>`, `<textarea>`)           | Checks the `value` **attribute/property** of the element | `<input type="text" value="abc">` |
+| `should('have.text', 'abc')`  | **Non-input elements** (like `<div>`, `<button>`, `<p>`) | Checks the **visible text content** between the tags     | `<button>abc</button>`            |
+
+cy.wrap() is a Cypress command that is used to wrap an object (like a variable, promise, DOM element, etc.) into a Cypress chainable so that you can continue chaining Cypress commands with it.
+cy.wait(3000)
