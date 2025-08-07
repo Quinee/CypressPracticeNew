@@ -55,7 +55,10 @@ it('Handling of alerts',function(){
     cy.on('window:confirm',(str)=>{
         expect(str).to.equal('Hello , Are you sure you want to confirm?')
     })
+    //To click on CANCEL in the popup
+    cy.on('window:confirm',()=>false)
 })
+
 
 it('Handling child tabs, page openeing in new tab',function(){
 
@@ -112,7 +115,7 @@ it('Handling child windows',function(){
 })
 it('iFrame test',()=>{
     cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
-    cy.frameLoaded('#courses-iframe')
+    cy.frameLoaded('#courses-iframe') //Load the iframe
     //cy.iframe().find('li.dropdown').eq(1).invoke('show')
     cy.iframe().contains('Part time jobs').click({force: true})
     cy.wait(2000)

@@ -304,3 +304,58 @@ cy.get('<locator>').type('Italy').type('{enter}')
 
 cy.wrap() is a Cypress command that is used to wrap an object (like a variable, promise, DOM element, etc.) into a Cypress chainable so that you can continue chaining Cypress commands with it.
 cy.wait(3000)
+
+Cypress events link https://docs.cypress.io/api/cypress-api/catalog-of-events
+
+```
+ it('Read all the rows & Columns data in the first page',()=>{
+
+        cy.get("table[class='table table-bordered table-hover']>tbody>tr")
+            .each( ($row,index,$rows)=>{
+
+                  cy.wrap($row).within(()=>{
+
+                      cy.get('td').each(($col,index,$cols)=>{
+                                cy.log($col.text());
+                       })
+            })
+
+        })
+    })
+```
+
+## Mouse events
+
+1. Right Click
+   cy.get(<locator>).trigger('mouseover)
+2. Double Click
+   cy.get(<locator>).trigger('dblclick)
+3. Drag and Drop
+   Use cypress drag and drop plugin
+
+```bash
+npm install --save-dev @4tw/cypress-drag-drop
+```
+
+## File Upload
+
+1. Add the cypress file upload plugin
+
+```bash
+npm install --save-dev cypress-file-upload
+```
+
+.attachFile() will read files available in fixtures
+
+## Commands In cypress
+
+In Support/Command.js
+
+```bash
+Cypress.Commands.add('selectProduct', (productName) => {
+    cy.get('h4.card-title').each(($e1,index)=>{
+    if($e1.text().includes(productName)){
+        cy.get('div.card-footer button').eq(index).click()
+    }
+}) })
+```
